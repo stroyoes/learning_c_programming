@@ -1,2 +1,3 @@
-# c_programming
-An elaborate e-book on C programming. 
+# Learning C Programming
+
+Just a bunch of C programs. 
