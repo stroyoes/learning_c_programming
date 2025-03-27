@@ -77,5 +77,3 @@ To remove the compiled files and `build/` directory, run:
 
 ---
 Project created as a simple book database system in C.
-
-Made by Sreesanth S Warrier 🤗
