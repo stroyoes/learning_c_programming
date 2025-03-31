@@ -1,0 +1,8 @@
+modules = ["c-clang14", "bash"]
+run = "cat README.md"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "cat README.md"]
