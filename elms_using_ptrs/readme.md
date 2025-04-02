@@ -14,7 +14,7 @@ This practice code demonstrates basic operations on arrays using pointers in C. 
 ### `void ptr_print_elms(int *arr, int size_of_arr);`
 Prints the elements of an array using pointer arithmetic.
 
-### `int get_sum_using_ptrs(int *arr, int size_of_arr);`
+### `void get_sum_using_ptrs(int *arr, int size_of_arr);`
 Computes and prints the sum of the elements of an array.
 
 ## Compilation & Execution
