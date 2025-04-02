@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-int get_sum_using_ptrs(int *arr, int size_of_arr) {
+void get_sum_using_ptrs(int *arr, int size_of_arr) {
     int sum_of_elms = 0;
     
     for (int i = 0; i < size_of_arr; i++) {
