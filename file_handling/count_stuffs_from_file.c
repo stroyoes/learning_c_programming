@@ -1,17 +1,22 @@
 #include <stdio.h>
 
+#define ERR -1
+
 int main() {
   int num_of_chars = 0, num_of_lines = 0, num_of_spaces = 0, num_of_tabs = 0;
   char file_name[50], ch;
   FILE *fp;
 
   printf("Enter file name: ");
-  scanf("%s", file_name);
+  if (scanf("%s", file_name) != 1) {
+    printf("\nERROR: Failed to read file name!\n");
+    return ERR;
+  }
 
   fp = fopen(file_name, "r");
   if (fp == NULL) {
-    printf("File opening failed!\n");
-    return 1;
+    printf("\nERROR: File opening failed!\n");
+    return ERR;
   }
 
   while ((ch = fgetc(fp)) != EOF) {
