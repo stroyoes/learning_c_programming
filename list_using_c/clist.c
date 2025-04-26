@@ -14,3 +14,7 @@ clist_t* create_clist() {
   return clist;
 }
 
+void append(clist_t *list, int value) {
+  if 
+}
+

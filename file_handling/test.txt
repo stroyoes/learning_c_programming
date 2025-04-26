@@ -1,0 +1,11 @@
+sample_text = """This is a sample text file.
+It contains:
+    Spaces:     Hello World
+Tabs:        Tabbed Text
+Newlines:    
+Multiple lines
+
+Special characters: !@#$%^&*()_+-=[]{}|;:,.<>?
+Numbers: 1234567890
+Punctuation: .!?,:;
+And even emojis: 🎉👍💻
