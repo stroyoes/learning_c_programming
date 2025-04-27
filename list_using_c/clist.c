@@ -123,6 +123,8 @@ clist_t* slice(clist_t *clist, int start, int end) {
     subclist->buffer[i] = clist->buffer[start + i];
 
   }
+
+  return subclist;
 }
 
 clist_t* reversed(clist_t *clist) {
@@ -148,6 +150,8 @@ clist_t* concat(int num_of_clists, clist_t **clists) {
       append(result_clist, clists[i]->buffer[j]);
     }
   }
+
+  return result_clist;
 }
 
 clist_t* map(clist_t *clist, int (*func)(int)) {
