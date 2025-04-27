@@ -14,7 +14,7 @@
  * @param limit Upper limit (non-inclusive) for the multiples.
  * @param multiples Pointer to the set where the multiples will be stored.
  */
-statis void init_set_of_multiples(const unsigned int factor, const unsigned int limit, set_t *multiples) {
+static void init_set_of_multiples(const unsigned int factor, const unsigned int limit, set_t *multiples) {
   unsigned int multiple = 0;
 
   while (multiple < limit && multiples->size < MAX_MULTIPLES) {
@@ -34,7 +34,7 @@ statis void init_set_of_multiples(const unsigned int factor, const unsigned int 
 static bool elem_exists(const set_t *set, unsigned int elem) {
   for (size_t i = 0; i < set->size; i++) {
     if (set->elems[i] == elem) {
-      return true // Element found
+      return true; // Element found
     }
   }
   return false; // Element not found 
