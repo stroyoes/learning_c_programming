@@ -93,3 +93,31 @@ CLIST_RETURN_NOTHING destroy_list(clist_t *clist) {
     free(clist);
 }
 
+clist_t* slice(clist_t *clist, int start, int end) {
+  if (start < 0) {
+    start += clist->size;
+  }
+  if (end < 0) {
+    end += clist->size;
+  }
+  
+  if (start < 0) start = 0;
+  if (end > clist->size) end = clist->size;
+  if (start >= end) {
+    clist_error = CLIST_INDEX_ERR;
+    return CLIST_ERR_NULL;
+  }
+
+  clist_t *subclist = malloc(sizeof(clist_t));
+  
+  if (subclist == NULL) {
+
+  }
+ 
+  subclist->size = end - start;
+  subclist->capacity = subclist->size;
+
+  subclist->buffer = malloc(subclist->capacity * sizeof(int));
+
+  
+}
