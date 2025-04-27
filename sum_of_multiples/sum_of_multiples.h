@@ -2,14 +2,14 @@
 #define SUM_OF_MULTIPLES_H
 
 #include <stdbool.h>
-#include <stddef.h> // for `size_t` datatype 
+#include <stddef.h> // For `size_t` datatype 
 
 #define MAX_FACTORS 20
 #define MAX_MULTIPLES 10000
 
 typedef struct {
-  unsigned int elems[MAX_MULTIPLES]; // array storing the multiples
-  size_t size; // tracks how many valid elements are in the set
+  unsigned int elems[MAX_MULTIPLES]; // Array storing the multiples
+  size_t size; // Tracks how many valid elements are in the set
 } set_t;
 
 /**
