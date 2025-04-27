@@ -1,4 +1,7 @@
 # Replit greated file
 generated-icon.png
 
+# Some kind of cache folder
+.ccls-cache/
+
 
