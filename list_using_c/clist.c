@@ -1,7 +1,6 @@
 #include "clist.h"
 #include "clist_err.h"
 
-#include <cstdio>
 #include <stdlib.h>
 
 clist_t* create_clist() {
@@ -88,11 +87,6 @@ CLIST_RETURN_NOTHING remove(clist_t *clist, int value) {
 
 }
 
-CLIST_RETURN_NOTHING destroy_list(clist_t *clist) {
-    free(clist->buffer);
-    free(clist);
-}
-
 clist_t* slice(clist_t *clist, int start, int end) {
   if (start < 0) {
     start += clist->size;
@@ -111,7 +105,8 @@ clist_t* slice(clist_t *clist, int start, int end) {
   clist_t *subclist = malloc(sizeof(clist_t));
   
   if (subclist == NULL) {
-
+    clist_error = CLIST_STRUCT_ALLOC_ERR;
+    return CLIST_ERR_NULL;
   }
  
   subclist->size = end - start;
@@ -119,5 +114,80 @@ clist_t* slice(clist_t *clist, int start, int end) {
 
   subclist->buffer = malloc(subclist->capacity * sizeof(int));
 
-  
+  if (subclist->buffer == NULL) {
+    clist_error = CLIST_BUFFER_ALLOC_ERR;
+    return CLIST_ERR_NULL;
+  }
+
+  for (int i = 0; i < subclist->size; i++) {
+    subclist->buffer[i] = clist->buffer[start + i];
+
+  }
+}
+
+clist_t* reversed(clist_t *clist) {
+  clist_t *reversed_clist = create_clist();
+
+  for (int i = clist->size - 1; i >= 0; i--) {
+    append(reversed_clist, clist->buffer[i]);
+  }
+
+  return reversed_clist;
+}
+
+clist_t* concat(int num_of_clists, clist_t **clists) {
+  if (num_of_clists <= 0) {
+    clist_error = CLISTS_CONCAT_ERR;
+    return CLIST_ERR_NULL;
+  }
+
+  clist_t *result_clist = create_clist();
+
+  for (int i = 0; i < num_of_clists; i++) {
+    for (int j = 0; j < clists[i]->size; j++) {
+      append(result_clist, clists[i]->buffer[j]);
+    }
+  }
+}
+
+clist_t* map(clist_t *clist, int (*func)(int)) {
+  if (!func) {
+    clist_error = CLIST_MAP_ERR;
+    return CLIST_ERR_NULL;
+  }
+
+  clist_t *mapped_clist = create_clist();
+
+  for (int i = 0; i < clist->size; i++) {
+    append(mapped_clist, func(clist->buffer[i]));
+  }
+
+  return mapped_clist;
+} 
+
+clist_t* filter(clist_t *clist, int (*predicate)(int)) {
+  if (!predicate) {
+    clist_error = CLIST_FILTER_ERR;
+    return CLIST_ERR_NULL;
+
+  }
+
+  clist_t *filtered_clist = create_clist();
+
+  for (int i = 0; i < clist->size; i++) {
+    if (predicate(clist->buffer[i])) {
+      append(filtered_clist, clist->buffer[i]);
+    }
+  }
+
+  return filtered_clist;
+}
+
+int length(clist_t *clist) {
+  return clist->size;
+}
+
+CLIST_RETURN_NOTHING destroy_list(clist_t *clist) {
+    free(clist->buffer);
+    free(clist);
 }

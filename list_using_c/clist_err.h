@@ -8,6 +8,9 @@ typedef enum {
   CLIST_STRUCT_ALLOC_ERR,
   CLIST_BUFFER_ALLOC_ERR,
   CLIST_INDEX_ERR,
+  CLISTS_CONCAT_ERR,
+  CLIST_MAP_ERR,
+  CLIST_FILTER_ERR,
 } clist_err_t;
 
 extern clist_err_t clist_error;
