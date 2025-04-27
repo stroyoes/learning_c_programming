@@ -1,6 +1,8 @@
 #ifndef CLIST_ERR_H
 #define CLIST_ERR_H
 
+#define CLIST_ERR_NULL NULL
+
 typedef enum { 
   CLIST_OK,
   CLIST_STRUCT_ALLOC_ERR,
