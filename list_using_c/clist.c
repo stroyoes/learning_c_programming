@@ -1,6 +1,5 @@
 #include "clist.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 
 clist_t* create_clist() {
@@ -15,5 +14,6 @@ clist_t* create_clist() {
 }
 
 void append(clist_t *list, int value) {
+
 }
 
