@@ -101,6 +101,11 @@ To compile the code:
    ./clist
    ```
 
+## Output (after running the `main.c` file)
+
+<img src="static/output_snapshot.png" alt="Screenshot of the Output">
+
+
 ## Future Enhancements
 
 This project can be expanded with additional features, such as:
