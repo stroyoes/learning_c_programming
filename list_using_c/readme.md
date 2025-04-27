@@ -1,141 +1,110 @@
-Got it — you want me to **expand** and **modify** your documentation to also include these new functions:
+# List Implementation in C (clist)
 
-- `concatenate`
-- `filter`
-- `length`
-- `map`
-- `reverse`
+This project provides a simple implementation of a dynamic list in C. Despite the name "clist", it is not a circular list but rather a flexible list structure. It supports various list operations such as appending elements, slicing, mapping, filtering, and more.
 
-I'll keep your style (emoji sections, detailed explanations) and add these functions properly, updating the whole doc so it's neat and complete.
+## Files Included
 
----
+- **`clist.c`**: Contains the implementation of the list's functionality.
+- **`clist.h`**: The header file that declares the list's functions and structure.
+- **`clist_err.c`**: Contains error handling functions for the list operations.
+- **`clist_err.h`**: The header file that declares the error handling functions.
 
-# 🧠 Dynamic List in C (Python-style)
+## Key Features
 
-This project implements a dynamic array in C that mimics Python's `list` behavior.  
-It supports a wide range of operations to make working with dynamic arrays in C easier and more intuitive.
+- **Append**: Adds elements to the end of the list.
+- **Remove**: Removes a specified element from the list.
+- **Get**: Retrieves an element by its index.
+- **Contains**: Checks if an element exists in the list.
+- **Count**: Returns the count of a specific element.
+- **Slice**: Extracts a portion of the list as a new list.
+- **Map**: Applies a function to every element in the list (e.g., doubling values).
+- **Filter**: Filters elements based on a condition (e.g., keeping only even numbers).
+- **Reverse**: Reverses the list.
+- **Concatenate**: Combines two lists into one.
 
----
+## Example Usage
 
-## ✅ Features
-
-- `append()` — Add elements to the end
-- `remove()` — Remove the first occurrence of a value
-- `contains()` — Check if a value exists in the list
-- `count()` — Count occurrences of a value
-- `get()` — Access by index (supports negative indexing)
-- `slice()` — Get a sub-list from a range (like Python slicing)
-- `concatenate()` — Merge multiple lists into one
-- `filter()` — Select elements matching a condition
-- `length()` — Get the number of elements
-- `map()` — Apply a function to all elements
-- `reverse()` — Reverse the elements of a list
-
----
-
-## ⚙️ Functions
-
-### `List* create_list()`
-Creates and initializes a new dynamic list using `malloc` and `calloc`.
-
-### `void append(List *list, int value)`
-Adds a value to the end of the list, resizing with `realloc` if needed.
-
-### `int get(List *list, int index)`
-Returns the element at a given index. Negative indices are allowed.
-
-### `int contains(List *list, int value)`
-Returns `1` if the value exists in the list, else `0`.
-
-### `int count(List *list, int value)`
-Returns how many times a value appears in the list.
-
-### `void remove_item(List *list, int value)`
-Removes the first occurrence of a value and shifts the remaining elements left.
-
-### `List* slice(List *list, int start, int end)`
-Creates a new list containing elements from index `start` to `end - 1`.  
-Negative indices are supported for flexible slicing.
-
-### `void free_list(List *list)`
-Frees all memory allocated to the list.
-
----
-
-## ➕ Advanced Functions
-
-### `List* concatenate(int num_lists, List **lists)`
-Combines multiple lists into a single new list, preserving the order of elements.
-
-| Parameter | Description |
-|:---|:---|
-| `num_lists` | Number of lists to merge |
-| `lists` | Array of pointers to `List` |
-
-### `List* filter(List *list, int (*predicate)(int))`
-Creates a new list containing only elements for which `predicate(element)` returns `true`.
-
-| Parameter | Description |
-|:---|:---|
-| `list` | The source list |
-| `predicate` | A function pointer that returns `1` if the item should be included |
-
-### `int length(List *list)`
-Returns the total number of elements in the list.
-
-### `List* map(List *list, int (*func)(int))`
-Applies a function to each element of the list and returns a new list of the results.
-
-| Parameter | Description |
-|:---|:---|
-| `list` | The source list |
-| `func` | A function pointer that modifies each item |
-
-### `List* reverse(List *list)`
-Creates a new list with all the original elements but in reversed order.
-
----
-
-## 📦 Memory Management
-
-- Uses `malloc` to create list structures and buffers
-- Uses `calloc` to initialize memory when creating new lists
-- Uses `realloc` for dynamic resizing during `append()`
-- `free_list()` must be called on any list created to avoid memory leaks
-- All functions that return a new `List*` allocate fresh memory (caller must `free_list()` after use)
-
----
-
-## 🧪 Example Usage
+Here's an example of how to use the `clist` in your program:
 
 ```c
-List *mylist = create_list();
-append(mylist, 10);
-append(mylist, 20);
-append(mylist, 30);
+#include "clist.h"
+#include "clist_err.h"
+#include <stdio.h>
 
-printf("Length: %d\n", length(mylist));
+int main() {
+    // Create the list
+    clist_t *list = create_clist();
+    if (list == NULL) {
+        printf("Error: %s\n", clist_err_msg(clist_error));
+        return 1;
+    }
 
-List *reversed = reverse(mylist);
-for (int i = 0; i < reversed->size; i++) {
-    printf("reversed[%d] = %d\n", i, reversed->data[i]);
+    // Append elements
+    for (int i = 1; i <= 5; i++) {
+        append(list, i);
+    }
+
+    // Print the list
+    print_clist(list);
+
+    // Get an element at index
+    printf("Element at index 2: %d\n", get(list, 2));
+
+    // Remove an element
+    remove_elem(list, 3);
+    print_clist(list);
+
+    // Clean up the list
+    destroy_list(list);
+
+    return 0;
 }
-free_list(reversed);
-
-int is_even(int x) { return x % 2 == 0; }
-List *even_list = filter(mylist, is_even);
-for (int i = 0; i < even_list->size; i++) {
-    printf("even_list[%d] = %d\n", i, even_list->data[i]);
-}
-free_list(even_list);
-
-free_list(mylist);
 ```
 
----
+## Functions Provided
 
-## ✨ TODO (Future Enhancements)
+### `clist.c`
 
-- Add support for generic types (using `void*` instead of `int`)
-- Implement iterator-like behavior for easier list traversals
+- **`create_clist`**: Initializes and returns an empty list.
+- **`destroy_list`**: Frees the memory allocated for the list.
+- **`append`**: Adds an element to the end of the list.
+- **`remove_elem`**: Removes an element from the list.
+- **`get`**: Retrieves the element at a specified index.
+- **`contains`**: Checks if an element is in the list.
+- **`count`**: Counts occurrences of an element in the list.
+- **`slice`**: Returns a sublist from a given range of indices.
+- **`map`**: Applies a function to each element of the list.
+- **`filter`**: Keeps only the elements that satisfy a given condition.
+- **`reversed`**: Returns a new list with the elements in reverse order.
+- **`concat`**: Concatenates two lists into one.
 
+### `clist_err.c`
+
+- **`clist_err_msg`**: Returns an error message based on the current error state.
+  
+## Error Handling
+
+The `clist_err.c` file handles error messages for list operations. If an operation fails (for example, if an invalid index is provided), the error message can be retrieved using the `clist_err_msg` function. Errors are reported using an enum in `clist_err.h`.
+
+## Compilation
+
+To compile the code:
+
+1. Make sure all the files (`clist.c`, `clist.h`, `clist_err.c`, `clist_err.h`) are in the same directory.
+2. Use the following command to compile:
+   ```bash
+   gcc clist.c clist_err.c main.c -o clist
+   ```
+
+3. Run the program:
+   ```bash
+   ./clist
+   ```
+
+## Future Enhancements
+
+This project can be expanded with additional features, such as:
+
+- Implementing more complex list operations (e.g., sorting, merging).
+- Adding support for other data types beyond integers (e.g., strings, structs).
+- Optimizing memory management and performance for large lists.

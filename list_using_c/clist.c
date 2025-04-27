@@ -17,6 +17,9 @@ clist_t* create_clist() {
   clist->buffer = calloc(clist->capacity, sizeof(int));
 
   if (clist->buffer == NULL) {
+    
+    free(clist);
+    
     clist_error = CLIST_BUFFER_ALLOC_ERR;
     return CLIST_ERR_NULL;
   }
@@ -70,7 +73,7 @@ int count(clist_t *clist, int value) {
   return seen;
 }
 
-CLIST_RETURN_NOTHING remove(clist_t *clist, int value) {
+CLIST_RETURN_NOTHING remove_elem(clist_t *clist, int value) {
   int found = 0;
 
   for (int i = 0; i < clist->size; i++) {

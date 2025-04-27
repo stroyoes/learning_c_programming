@@ -15,4 +15,6 @@ typedef enum {
 
 extern clist_err_t clist_error;
 
+const char* clist_err_msg(clist_err_t err_code);
+
 #endif
