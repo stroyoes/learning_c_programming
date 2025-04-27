@@ -1,6 +1,6 @@
 # List Implementation in C (clist)
 
-This project provides a simple implementation of a dynamic list in C. Despite the name "clist", it is not a circular list but rather a flexible list structure. It supports various list operations such as appending elements, slicing, mapping, filtering, and more.
+This project provides a simple implementation of a dynamic list in C. It supports various list operations such as appending elements, slicing, mapping, filtering, and more.
 
 ## Files Included
 
