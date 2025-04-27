@@ -1,6 +1,7 @@
 #include "clist.h"
 #include "clist_err.h"
 
+#include <cstdio>
 #include <stdlib.h>
 
 clist_t* create_clist() {
@@ -60,6 +61,35 @@ int contains(clist_t *clist, int value) {
 }
 
 int count(clist_t *clist, int value) {
+  int seen = 0; 
+  for (int i = 0; i < clist->size; i++) {
+    if (clist->buffer[i] == value) {
+      seen++;
+    }
+  }
 
+  return seen;
+}
+
+CLIST_RETURN_NOTHING remove(clist_t *clist, int value) {
+  int found = 0;
+
+  for (int i = 0; i < clist->size; i++) {
+    if (clist->buffer[i] == value) {
+      found = true;
+    }
+    if (found && i < clist->size - 1) {
+      clist->buffer[i] = clist->buffer[i + 1];
+    }
+  }
+  if (found) {
+    clist->size--;
+  }
+
+}
+
+CLIST_RETURN_NOTHING destroy_list(clist_t *clist) {
+    free(clist->buffer);
+    free(clist);
 }
 
