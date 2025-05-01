@@ -1,3 +1,5 @@
+/** Find the max element from a dynamically allocated array using pointers **/
+
 #include <stdio.h>
 #include <stdlib.h>
 
