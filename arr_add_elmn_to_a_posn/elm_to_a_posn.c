@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "elm_to_front.h"
+#include "elm_to_a_posn.h"
 
 // Allocated memory for a dynamic array 
 void init_dynamic_arr(dynamic_arr_t *arr, size_t initial_size, const char *desc) {

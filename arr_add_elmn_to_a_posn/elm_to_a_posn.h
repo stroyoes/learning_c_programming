@@ -1,5 +1,5 @@
-#ifndef ELM_TO_FRONT
-#define ELM_TO_FRONT
+#ifndef ELM_TO_A_POSN
+#define ELM_TO_A_POSN
 
 #include <stddef.h>
 
