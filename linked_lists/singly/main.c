@@ -27,7 +27,7 @@ int main() {
   print_list(head);
 
   int num_of_nodes = get_num_of_nodes(&head);
-  printf("\nThe number of nodes of this linked list is : %d", num_of_nodes);
+  printf("\nThe number of nodes of this linked list is : %d\n", num_of_nodes);
 
   free_list(head);
   return 0;
