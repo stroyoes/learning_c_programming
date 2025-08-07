@@ -103,8 +103,11 @@ void print_deque() {
 int main() {
   int x;
 
+  printf("Insert to rear 10 and 20 ... \n");
   insert_rear(10);
   insert_rear(20);
+
+  printf("Insert to front 5 and 2 ... \n");
   insert_front(5);
   insert_front(2);
   print_deque(); // [ 2, 5, 10, 20 ]
@@ -115,6 +118,7 @@ int main() {
   printf("Deleted from front: %d\n", x);
   print_deque(); // [ 5, 10 ]
 
+  printf("Insert to front 1 and to rear 99 and 100 ... \n");
   insert_front(1);
   insert_rear(99);
   insert_rear(100);
