@@ -52,7 +52,7 @@ static list_node* create_node(int value) {
  * Insert an element to the front of the linked list. 
  * Returns:
  *  -1 if there was an error in allocating the node 
- *  0 if everything worked fine
+ *  0 if insertion was succesfull
  */
 int insert_front(list_node **head, int value) {
   list_node *new_node = create_node(value);
@@ -69,7 +69,7 @@ int insert_front(list_node **head, int value) {
  * Insert an element to the end of the linked list.
  * Returns:
  *  -1 if there was an error allocating the node
- *  0 if everything worked fine 
+ *  0 if insertion was succesfull
  */
 int insert_end(list_node **head, int value) {
   list_node *new_node = create_node(value);
@@ -92,11 +92,11 @@ int insert_end(list_node **head, int value) {
 }
 
 /**
- * Insert an element after some element (i.e. in between the linked list). 
+ * Insert an element after the first occurence of a node with given "after" value (i.e. in between the linked list). 
  * Returns:
  *  -1 if element is not found 
  *  -2 if node allocation failed 
- *  0 if eveything worked fine 
+ *  0 if insertion was succesfull
  */
 int insert_after(list_node **head, int value, int after) {
   list_node *node_seen = *head;
@@ -116,7 +116,94 @@ int insert_after(list_node **head, int value, int after) {
   return 0;
 }
 
-//  TODO: Delete funcs  
+/**
+ * Delete the front (1st) node of the linekd list. 
+ * Returns:
+ *  -1 if list is empty
+ *  0 if deletion was succesfull
+ */
+int delete_front(list_node **head) {
+  if (is_empty(*head)) {
+    return -1;
+  } 
+
+  list_node *tmp = *head;
+  *head = (*head)->link;
+
+  free(tmp);
+
+  return 0;
+} 
+
+/**
+ * Delete the last node of the linked list.  
+ * Returns:
+ *  -1 if the list is empty 
+ *  0 if deletions was succesfull
+ */ 
+int delete_end(list_node **head) {
+  if (is_empty(*head)) {
+    return -1;
+  } 
+
+  list_node *node_seen = *head;
+  list_node *node_seen_before = NULL;
+
+  // If only one node exists 
+  if (node_seen->link == NULL) {
+    // Then free that one node 
+    free(node_seen);
+
+    *head = NULL;
+    return 0;
+  } 
+
+  // Traverse to second last node 
+  while (node_seen->link) {
+    node_seen_before = node_seen;
+    node_seen = node_seen->link;
+
+  }
+
+  // Make previous node as last node and remove last node 
+  node_seen_before->link = NULL;
+  free(node_seen);
+
+  return 0;
+}
+
+/**
+ * Delete the node after the first occurence of a node with the given "after" value (i.e. in b/w the linked list).
+ * Returns:
+ *  -1 if list is empty or node with "after" not found
+ *  0 if deletion was succesfull
+ */
+int delete_after(list_node **head, int after) {
+  if (is_empty(*head)) {
+    return -1;
+  }
+
+  list_node *node_seen = *head;
+
+  // Get the node with value "after"
+  while (node_seen && node_seen->data != after) {
+    node_seen = node_seen->link;
+  }
+
+  // Check if there is a node with "after" and has a next node too (to delete)
+  if (!node_seen || !(node_seen->link)) {
+    return -1;
+  }
+
+  list_node *node_to_delete = node_seen->link;
+
+  node_seen->link = node_to_delete->link; // Skip the node_to_delete from linked list 
+
+  // Remove the node 
+  free(node_to_delete);
+
+  return 0;
+}
 
 
 /**
