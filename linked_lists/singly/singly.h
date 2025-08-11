@@ -12,7 +12,7 @@ struct list_node {
 
 typedef struct list_node list_node;
 
-int get_num_of_nodes(list_node **head);
+int get_num_of_nodes(list_node *head);
 
 // To modify a pointer we have to provide the address of the pointer, so **pointer
 int insert_front(list_node **head, int value); 

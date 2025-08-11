@@ -2,24 +2,31 @@
 
 #include "singly.h"
 
+/**
+ * Check if the linked list is empty. 
+ */ 
 static bool is_empty(list_node *head) {
   return head == NULL;
 }
 
-// Get the total number of nodes in linked list
-int get_num_of_nodes(list_node **head) {
+/**
+ * Get the count of total nodes in the linked list using traversal. 
+ */
+int get_num_of_nodes(list_node *head) {
   int total_nodes = 0;
-  list_node *node_seen = *head;
+  list_node *node_seen = head;
 
   while (node_seen) {
-    total_nodes++; // Increment by counter 
+    total_nodes++; // Increment the counter
     node_seen = node_seen->link; // Move to next node 
   }
   return total_nodes;
 }
 
-
-// Create a new node 
+/**
+ * Allocate a new node and set its fields. A new nodes link should be initialized
+ * to NULL or to an existing node. 
+ */
 static list_node* create_node(int value) {
   list_node *new_node = (list_node *)malloc(sizeof(list_node));
 
@@ -34,7 +41,19 @@ static list_node* create_node(int value) {
   return new_node;
 }
 
-// Insert at front 
+/*  
+ *  NOTE: 
+ *  Double pointer lets us change the actual head pointer in the caller. With a single pointer, we'd only change a local copy. Use ** when reassigning the head itself; use * when only accessing or modifying existing nodes.
+ *  Remember: head itself is a pointer, so here we're passing a pointer to a pointer when using ** .  When we are not modifying the head we take only copy of the header pointer (only one * enough). 
+*/
+
+
+/**
+ * Insert an element to the front of the linked list. 
+ * Returns:
+ *  -1 if there was an error in allocating the node 
+ *  0 if everything worked fine
+ */
 int insert_front(list_node **head, int value) {
   list_node *new_node = create_node(value);
 
@@ -46,13 +65,18 @@ int insert_front(list_node **head, int value) {
   return 0;
 }
 
-// Insert at end 
+/**
+ * Insert an element to the end of the linked list.
+ * Returns:
+ *  -1 if there was an error allocating the node
+ *  0 if everything worked fine 
+ */
 int insert_end(list_node **head, int value) {
   list_node *new_node = create_node(value);
 
   if (!new_node) { return -1; }
   
-  // If there are zero nodes and head is null 
+  // If there are zero nodes that is head points to NULL  
   if (*head == NULL) {
     *head = new_node;
     return 0;
@@ -67,8 +91,13 @@ int insert_end(list_node **head, int value) {
   return 0;
 }
 
-// Insert in between two nodes 
-// Returns -1 if element not found and -2 for allocation error
+/**
+ * Insert an element after some element (i.e. in between the linked list). 
+ * Returns:
+ *  -1 if element is not found 
+ *  -2 if node allocation failed 
+ *  0 if eveything worked fine 
+ */
 int insert_after(list_node **head, int value, int after) {
   list_node *node_seen = *head;
 
@@ -87,11 +116,16 @@ int insert_after(list_node **head, int value, int after) {
   return 0;
 }
 
+//  TODO: Delete funcs  
 
-//  TODO:  Add delete functions 
 
-// Display the linked list 
-// As we are not modifying the head so we take only copy of the header pointer 
+/**
+ * Display the linked list.
+ * Traverses the linked list starting from the given head pointer and prints 
+ * each node's data in sequence until the end of the list (NULL) is reached.
+ *
+ * The head pointer is passed by value (a copy), so the original list remains unchanged.
+ */
 void print_list(list_node *head) {
   while (head) {
     printf("%d ->", head->data);
@@ -100,8 +134,13 @@ void print_list(list_node *head) {
   printf(" NULL\n");
 }
 
-// Clean everything free the nodes 
-// Here the head pointer is enough as we are freeing each node and making no modifications to head 
+/**
+ * Free all nodes in the linked list.
+ * Iterates through the linked list, freeing each node one by one.
+ *
+ * The head pointer is passed by value and is not modified outside 
+ * the function, but since the memory is freed, the list becomes invalid.
+ */
 void free_list(list_node *head) {
   list_node *node_seen; 
 
