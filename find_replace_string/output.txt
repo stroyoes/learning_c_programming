@@ -1,0 +1,8 @@
+
+Enter the text:
+What we do in life echoes in eternity.
+Enter the word to find: life
+Enter the word to replace it with: battle
+
+Modified text:
+What we do in battle echoes in eternity.
