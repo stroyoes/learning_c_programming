@@ -1,0 +1,96 @@
+
+--- Dictionary ---
+1) Insert word
+2) Search word
+3) Display Dictionary
+4) Exit
+
+Enter your choice: 1
+
+Enter the word: cat 
+
+Enter meaning: cute animal 
+
+--- Dictionary ---
+1) Insert word
+2) Search word
+3) Display Dictionary
+4) Exit
+
+Enter your choice: 1
+
+Enter the word: cap 
+
+Enter meaning: something that people wear on their head
+
+--- Dictionary ---
+1) Insert word
+2) Search word
+3) Display Dictionary
+4) Exit
+
+Enter your choice: 1
+
+Enter the word: ship
+
+Enter meaning: a form of water transport
+
+--- Dictionary ---
+1) Insert word
+2) Search word
+3) Display Dictionary
+4) Exit
+
+Enter your choice: 3
+
+--- All words and meanings ---
+
+Meaning of "cap " is something that people wear on their head 
+
+Meaning of "cat " is cute animal  
+
+Meaning of "ship " is a form of water transport 
+
+--- Dictionary ---
+1) Insert word
+2) Search word
+3) Display Dictionary
+4) Exit
+
+Enter your choice: 2
+
+Enter word to search: cap 
+
+Meaning of "cap " is something that people wear on their head .
+
+--- Dictionary ---
+1) Insert word
+2) Search word
+3) Display Dictionary
+4) Exit
+
+Enter your choice: 2
+
+Enter word to search: cat 
+
+Meaning of "cat " is cute animal  .
+
+--- Dictionary ---
+1) Insert word
+2) Search word
+3) Display Dictionary
+4) Exit
+
+Enter your choice: 5
+
+Invalid choice ... try once more ... 
+
+--- Dictionary ---
+1) Insert word
+2) Search word
+3) Display Dictionary
+4) Exit
+
+Enter your choice: 4
+
+Exiting ...
